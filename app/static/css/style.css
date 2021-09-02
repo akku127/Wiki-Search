@@ -84,7 +84,7 @@ nav li{
 }
 
 .row1{
-
+    font-family: 'Poppins', sans-serif;
     width: 80%;
     border: 1px solid rgba(156, 156, 92, 0.5);
     border-radius: 1em;
@@ -92,8 +92,8 @@ nav li{
     margin-top: 1.5em;
     flex-direction: column;
     font-size: 14px;
-    line-height: 1.5em;
-    letter-spacing: 1rem;
+    line-height: 1.7em;
+    letter-spacing: 0.11rem;
     padding: 1em;
     background: linear-gradient(to bottom, rgba(102, 73, 116, 0.5), rgba(117, 19, 93, 0.7));
     z-index: 1;
