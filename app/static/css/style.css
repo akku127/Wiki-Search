@@ -18,7 +18,7 @@ input[type='text']{
     border: none;
     padding: 10px;
     border-radius: 10px;
--webkit-transition: all 0.7s ease 0s;
+    -webkit-transition: all 0.7s ease 0s;
 }
 input[type='text']:focus-within{
     background: blanchedalmond;
@@ -163,5 +163,20 @@ nav li{
     100%{
         opacity: 1;
         transform: translateY(0px);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .row1{
+        width: 90%;
+        font-size: 12px;
+    }
+    input[type='text']{
+        margin-right: 2em;
+    }
+    .top{
+        position: absolute;
+        bottom: 2vh;
+        right: 2vw;
     }
 }

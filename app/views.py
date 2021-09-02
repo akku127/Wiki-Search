@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 # Create your views here.
 
 def index(request):
+    values = False
     num = None
     topic = ""
     pages = []
@@ -27,6 +28,7 @@ def index(request):
 
         # topic_suggestion = topic
         search_topics = wikipedia.search(topic, results=num)
+        values = True
         # print(search_topics)
         for item in search_topics:
             try:
@@ -48,4 +50,4 @@ def index(request):
                 print("Disambiguation__________________ error")
                 print(e)
     return render(request, 'app/index.html',
-                  {'pages': zip(pages, pics), 'suggestion': topic_suggestion, 'topic': topic, 'num': num})
+                  {'pages': zip(pages, pics), 'suggestion': topic_suggestion, 'topic': topic, 'num': num, 'value': values})
