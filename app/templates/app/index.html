@@ -1,0 +1,96 @@
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Wiki_Search</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <a href="{% url 'index' %}"><h2>Search wikipedia</h2></a>
+      </div>
+      <li><a href="#">About</a></li>
+    </nav>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    {% if pages %}
+    <div class="form-content">
+      <form action="" method="GET">
+        <input
+          type="text"
+          name="topic"
+          id="topic"
+          placeholder="Topic"
+          required
+          value="{{topic}}"
+        />
+        <select name="results" id="">
+          {% if num %}
+          <option value="{{num}}" selected>{{num}}</option>
+          {% endif %}
+          <option value="2">2</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+        </select>
+      </form>
+    </div>
+    {% endif %}
+    <div class="results">
+      {% if suggestion %}
+      <div class="search_instead">
+        <p>Did you mean <a href="?topic={{suggestion}}">{{suggestion}}</a> ?</p>
+      </div>
+
+      {% endif %}
+
+      {% for page, pic in pages %}
+
+      <div class="row1" id="{{forloop.counter}}">
+        <h2>{{page.title}}</h2>
+<!--        <div class="page_pic">-->
+<!--          <img src="{{pic}}" alt="picture" />-->
+<!--        </div>-->
+        <h3>{{page.summary}}</h3>
+        <p><a href="{{page.url}}" target="_blank">Read More ..</a></p>
+      </div>
+
+      {% endfor %}
+      {% if pages|length > 0 %}
+      <a href="#1">
+        <div class="top">Top</div>
+      </a>
+      {% endif %}
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script>
+      $("#topic").autocomplete({
+        source: function (request, response) {
+          $.ajax({
+            url: "http://en.wikipedia.org/w/api.php",
+            dataType: "jsonp",
+            data: {
+              action: "opensearch",
+              format: "json",
+              search: request.term,
+            },
+            success: function (data) {
+              response(data[1]);
+            },
+          });
+        },
+      });
+    </script>
+  </body>
+</html>
