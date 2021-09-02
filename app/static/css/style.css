@@ -153,7 +153,28 @@ nav li{
     text-decoration: none;
     color: blanchedalmond;
 }
+.about_text{
+    display: none;
+}
 
+.about_text.active{
+    z-index: 3;
+    border-radius: 2em;
+    margin-top: 1vh;
+    position: absolute;
+    top: 20vh;
+    right: 30vw;
+    left: 30vw;
+    display: flex;
+    justify-content: center;
+    width: 40vw;
+    height: 20vh;
+    border: 1px solid red;
+    background-color: rgba(116, 10, 89, 1);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    align-items: center;
+}
 
 @keyframes drop{
     0%{

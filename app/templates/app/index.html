@@ -1,84 +1,89 @@
 {% load static %}
 
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <title>Wiki_Search</title>
-  </head>
-  <body>
-    <nav>
-      <div class="logo">
+</head>
+<body>
+<nav>
+    <div class="logo">
         <a href="{% url 'index' %}"><h2>Search wikipedia</h2></a>
-      </div>
-      <li><a href="#">About</a></li>
-    </nav>
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto"
-      rel="stylesheet"
-    />
-    {% if pages %}
-    <div class="form-content">
-      <form action="" method="GET">
+    </div>
+    <div class="about_text">
+        <p>Just search about anything in the search bar, you can set the number of results desired using the
+            dropdown</p>
+    </div>
+    <li><a href="#" class="about">About</a></li>
+</nav>
+<link
+        href="https://fonts.googleapis.com/css?family=Roboto"
+        rel="stylesheet"
+/>
+{% if pages %}
+<div class="form-content">
+    <form action="" method="GET">
         <input
-          type="text"
-          name="topic"
-          id="topic"
-          placeholder="Topic"
-          required
-          value="{{topic}}"
+                type="text"
+                name="topic"
+                id="topic"
+                placeholder="Topic"
+                required
+                value="{{topic}}"
         />
         <select name="results" id="">
-          {% if num %}
-          <option value="{{num}}" selected>{{num}}</option>
-          {% endif %}
-          <option value="2">2</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
+            {% if num %}
+            <option value="{{num}}" selected>{{num}}</option>
+            {% endif %}
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
         </select>
-      </form>
-    </div>
-    {% endif %}
-    <div class="results">
-      {% if suggestion %}
-      <div class="search_instead">
+    </form>
+</div>
+{% endif %}
+<div class="results">
+    {% if suggestion %}
+    <div class="search_instead">
         <p>Did you mean <a href="?topic={{suggestion}}">{{suggestion}}</a> ?</p>
-      </div>
+    </div>
 
-      {% endif %}
+    {% endif %}
 
-      {% for page, pic in pages %}
+    {% for page, pic in pages %}
 
-      <div class="row1" id="{{forloop.counter}}">
+    <div class="row1" id="{{forloop.counter}}">
         <h2>{{page.title}}</h2>
-<!--        <div class="page_pic">-->
-<!--          <img src="{{pic}}" alt="picture" />-->
-<!--        </div>-->
+        <!--        <div class="page_pic">-->
+        <!--          <img src="{{pic}}" alt="picture" />-->
+        <!--        </div>-->
         <h3>{{page.summary}}</h3>
         <p><a href="{{page.url}}" target="_blank">Read More ..</a></p>
-      </div>
-
-      {% endfor %}
-      {% if value %}
-      <a href="#1">
-        <div class="top">Top</div>
-      </a>
-      {% endif %}
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-    <script>
+    {% endfor %}
+    {% if value %}
+    <a href="#1">
+        <div class="top">Top</div>
+    </a>
+    {% endif %}
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link
+        rel="stylesheet"
+        href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css"
+/>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<script src="{% static 'scripts/script.js' %}"></script>
+
+<script>
       $("#topic").autocomplete({
         source: function (request, response) {
           $.ajax({
@@ -95,6 +100,7 @@
           });
         },
       });
-    </script>
-  </body>
+
+</script>
+</body>
 </html>
